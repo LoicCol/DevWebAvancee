@@ -1,6 +1,9 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Techno} from "./entity/Techno";
+import * as express from 'express';
+import * as bodyParser from "body-parser";
+import * as techController from "./controller/TechnoController";
 
 createConnection().then(async connection => {
 
@@ -133,7 +136,32 @@ createConnection().then(async connection => {
     console.log("Loading technos from the database...");
     const technos = await connection.manager.find(Techno);
     console.log("Loaded technos: ", technos);
-     
-    console.log("Here you can setup and run express/koa/any other framework.");
+
+    /**
+     * Create Express server.
+     */
+    const app = express();
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    /**
+     * Express configuration.
+     */
+    app.set("port", process.env.PORT || 3000);
+
+    /**
+     * Start Express server.
+     */
+    app.listen(app.get("port"), () => {
+        console.log(("  App is running at http://localhost:%d in %s mode"), app.get("port"), app.get("env"));
+        console.log("  Press CTRL-C to stop\n");
+    });
+
+    /**
+     * Primary app routes.
+     */
+    app.get("/techno", techController.getAllTechno);
+    app.post("/techno", techController.saveTechno);
+
+    module.exports = app;
     
 }).catch(error => console.log(error));
