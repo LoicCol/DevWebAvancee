@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
-import {App} from "./App";
+import {Application} from "./Application";
 
 @Entity()
 export class Flow {
@@ -13,10 +13,10 @@ export class Flow {
     @Column()
     description: string;
 
-    @ManyToOne(type => App, app => app.srcFlows)
-    srcApp: App;
+    @ManyToOne(type => Application, application => application.srcFlows)
+    srcApplication: Application;
 
-    @ManyToOne(type => App, app => app.tarFlows)
-    tarApp: App;
+    @ManyToOne(type => Application, application => application.tarFlows)
+    tarApplication: Application;
 
 }

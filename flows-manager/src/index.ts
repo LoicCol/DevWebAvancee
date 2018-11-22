@@ -132,7 +132,7 @@ createConnection().then(async connection => {
     techno.name = "Haskell";
     await connection.manager.save(techno);
     console.log("Saved a new techno with id: " + techno.id);
-    
+
     console.log("Loading technos from the database...");
     const technos = await connection.manager.find(Techno);
     console.log("Loaded technos: ", technos);
@@ -140,28 +140,28 @@ createConnection().then(async connection => {
     /**
      * Create Express server.
      */
-    const app = express();
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+    const application = express();
+    application.use(bodyParser.json());
+    application.use(bodyParser.urlencoded({ extended: true }));
     /**
      * Express configuration.
      */
-    app.set("port", process.env.PORT || 3000);
+    application.set("port", process.env.PORT || 3000);
 
     /**
      * Start Express server.
      */
-    app.listen(app.get("port"), () => {
-        console.log(("  App is running at http://localhost:%d in %s mode"), app.get("port"), app.get("env"));
+    application.listen(application.get("port"), () => {
+        console.log(("  Application is running at http://localhost:%d in %s mode"), application.get("port"), application.get("env"));
         console.log("  Press CTRL-C to stop\n");
     });
 
     /**
-     * Primary app routes.
+     * Primary application routes.
      */
-    app.get("/techno", techController.getAllTechno);
-    app.post("/techno", techController.saveTechno);
+    application.get("/api/v1.0/technos", techController.getAllTechno);
+    application.post("/api/v1.0/technos", techController.saveTechno);
 
-    module.exports = app;
-    
+    module.exports = application;
+
 }).catch(error => console.log(error));

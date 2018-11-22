@@ -3,7 +3,7 @@ import {Techno} from "./Techno";
 import {Flow} from "./Flow";
 
 @Entity()
-export class App {
+export class Application {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -11,13 +11,13 @@ export class App {
     @Column()
     name: string;
 
-    @ManyToOne(type => Techno, techno => techno.apps)
+    @ManyToOne(type => Techno, techno => techno.applications)
     techno: Techno;
 
-    @OneToMany(type => Flow, flow => flow.srcApp)
-    srcFlows: App[];
+    @OneToMany(type => Flow, flow => flow.srcApplication)
+    srcFlows: Flow[];
 
-    @OneToMany(type => Flow, flow => flow.tarApp)
-    tarFlows: App[];
+    @OneToMany(type => Flow, flow => flow.tarApplication)
+    tarFlows: Flow[];
 
 }

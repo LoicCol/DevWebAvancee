@@ -3,7 +3,8 @@
    "version": "0.0.0",
    "private": true,
    "scripts": {
-      "start": "ts-node src/index.ts"
+      "start": "ts-node src/index.ts",
+      "start_local": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=local PORT=3004 ts-node src/index.ts"
    },
    "dependencies": {
       "cookie-parser": "~1.4.3",

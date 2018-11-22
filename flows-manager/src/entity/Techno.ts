@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
-import {App} from "./App";
+import {Application} from "./Application";
 
 @Entity()
 export class Techno {
@@ -10,7 +10,7 @@ export class Techno {
     @Column()
     name: string;
 
-    @OneToMany(type => App, app => app.techno)
-    apps: App[];
+    @OneToMany(type => Application, application => application.techno)
+    applications: Application[];
 
 }
