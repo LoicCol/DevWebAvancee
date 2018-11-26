@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 
 class BaseModel {
   constructor () {
-    this.API_URL = 'http://localhost:3004/api/v1.0'
+    this.API_URL = 'http://localhost:0/api/v1.0'
   }
 
   static objects () {
@@ -29,13 +29,16 @@ class BaseModel {
     let options = {
       method: opts.method || 'GET',
       headers: opts.headers || {},
-      body: data || undefined
+      body: data || undefined,
+      credentials: 'include'
     }
     if (opts && opts.cache) options.cache = opts.cache
+    console.log('YOUHHOUUUU::', options)
     return options
   }
 
   checkResponseStatus (response) {
+    console.log('YOYOYO 1000')
     if (response.status >= 200 && response.status < 310) {
       return response
     } else {

@@ -10,6 +10,7 @@ export let getAllTechno = async (req: Request, res: Response) => {
     techRepo.getAllTechno().then((result: any) => {
         console.log("Result : " + result);
         res.send(result);
+
     });
 };
 

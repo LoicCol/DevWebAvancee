@@ -7,7 +7,7 @@ class TechnoModel extends BaseModel {
       this.API_URL + '/technos',
       this.buildFetchOptions({
         method: 'GET',
-        headers: this.buildHeaders
+        headers: this.buildHeaders()
       })
     )
       .then(this.checkResponseStatus)

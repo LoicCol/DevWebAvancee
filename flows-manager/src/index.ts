@@ -3,10 +3,11 @@ import {createConnection} from "typeorm";
 import {Techno} from "./entity/Techno";
 import * as express from 'express';
 import * as bodyParser from "body-parser";
-import * as techController from "./controller/TechnoController";
+
+const errorMiddleware = require('../middlewares/error')
 
 createConnection().then(async connection => {
-
+    /*
     console.log("Inserting a new techno into the database...");
     var techno = new Techno();
     techno.name = "JavaScript";
@@ -136,17 +137,19 @@ createConnection().then(async connection => {
     console.log("Loading technos from the database...");
     const technos = await connection.manager.find(Techno);
     console.log("Loaded technos: ", technos);
-
+    */
     /**
      * Create Express server.
      */
     const application = express();
     application.use(bodyParser.json());
     application.use(bodyParser.urlencoded({ extended: true }));
+
     /**
      * Express configuration.
      */
-    application.set("port", process.env.PORT || 3000);
+    console.log('YAYAYAYA ok ::', process.env.PORT)
+    application.set("port", process.env.PORT || 3004);
 
     /**
      * Start Express server.
@@ -157,11 +160,15 @@ createConnection().then(async connection => {
     });
 
     /**
-     * Primary application routes.
+     * Routes
      */
-    application.get("/api/v1.0/technos", techController.getAllTechno);
-    application.post("/api/v1.0/technos", techController.saveTechno);
 
+    application.use('/api/v1.0', require('./routes'));
+
+    application.use(function (err, req, res, next) {
+      errorMiddleware.handleErrors(err, req, res, next, {env: application.get('env')})
+    })
+    console.log('ooo')
     module.exports = application;
 
 }).catch(error => console.log(error));
