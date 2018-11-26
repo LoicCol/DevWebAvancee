@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 
 class BaseModel {
   constructor () {
-    this.API_URL = 'http://localhost:0/api/v1.0'
+    this.API_URL = 'http://localhost:3004/api/v1.0'
   }
 
   static objects () {
