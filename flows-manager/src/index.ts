@@ -148,7 +148,6 @@ createConnection().then(async connection => {
     /**
      * Express configuration.
      */
-    console.log('YAYAYAYA ok ::', process.env.PORT)
     application.set("port", process.env.PORT || 3004);
 
     /**

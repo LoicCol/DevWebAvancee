@@ -5,10 +5,7 @@ const headersMiddleware = require('../../middlewares/headers')
 
 module.exports = router
 
-console.log('YOYOYOYO')
-
 router.use((req, res, next) => {
-  console.log('YAAAAA 2')
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
 
@@ -27,8 +24,9 @@ router.use((req, res, next) => {
 })
 
 
-console.log('YOYOYOYO 3')
 router.use('/technos', require('./technos'))
+router.use('/flows', require('./flows'))
+router.use('/apps', require('./apps'))
 
 router.use((req, res, next) => {
   console.log(req._parsedOriginalUrl)

@@ -8,10 +8,13 @@ module.exports = router
 /*
 * List technos
 */
-console.log('YOYOYO 3')
 router.get('/', technoController.getAllTechno)
 
-console.log('YOYOYO 4')
+/*
+* get techno
+*/
+router.get('/:id', technoController.getTechno)
+
 /*
 * Post a techno
 */

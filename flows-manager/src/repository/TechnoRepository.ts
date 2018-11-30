@@ -8,6 +8,10 @@ export class TechnoRepository {
         return getManager().getRepository(Techno).find();
     }
 
+    getTechno(id: number) {
+        return getManager().getRepository(Techno).findOne(id);
+    }
+
     saveTechno(techno: Techno) {
         return getManager().getRepository(Techno).save(techno);
     }

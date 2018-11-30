@@ -11,6 +11,12 @@ export class Application {
     @Column()
     name: string;
 
+    @Column()
+    description: string;
+
+    @Column()
+    team: string;
+
     @ManyToOne(type => Techno, techno => techno.applications)
     techno: Techno;
 
