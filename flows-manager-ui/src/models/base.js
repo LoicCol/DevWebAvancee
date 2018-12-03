@@ -33,12 +33,10 @@ class BaseModel {
       credentials: 'include'
     }
     if (opts && opts.cache) options.cache = opts.cache
-    console.log('YOUHHOUUUU::', options)
     return options
   }
 
   checkResponseStatus (response) {
-    console.log('YOYOYO 1000')
     if (response.status >= 200 && response.status < 310) {
       return response
     } else {

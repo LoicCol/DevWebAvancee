@@ -28,17 +28,13 @@ class Technos extends Component {
   render () {
     let technosContainer = []
 
-    console.log('YOUHOU:: out if ')
     if (this.state && this.state.technos) {
-      console.log('YOUHOU:: in if ', this.state)
       _forEach(this.state.technos, tech => {
         technosContainer.push(
           <div>{tech.name}</div>
         )
       })
     }
-
-    console.log('YOUHOU:: ', technosContainer)
 
     return (
       <div>
