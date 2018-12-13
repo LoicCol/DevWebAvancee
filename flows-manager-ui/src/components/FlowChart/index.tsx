@@ -30,14 +30,14 @@ class FlowChart extends Component<MyProps, MyState>{
 
 	generateNodes(model: DiagramModel, flow: any, offsetX: number, offsetY: number) {
 		//3-A) create a default node
-		var node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)");
-		var port1 = node1.addOutPort("Out");
-		node1.setPosition(100 + offsetX, 300 + offsetY);
+		var node1 = new DefaultNodeModel(flow.srcApplication.name, "rgb(0,192,255)");
+		var port1 = node1.addOutPort(flow.srcApplication.description);
+		node1.setPosition(100 + offsetX, 100 + offsetY);
 
 		//3-B) create another default node
-		var node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)");
-		var port2 = node2.addInPort("In");
-		node2.setPosition(300 + offsetX, 500 + offsetY);
+		var node2 = new DefaultNodeModel(flow.tarApplication.name, "rgb(192,255,0)");
+		var port2 = node2.addInPort(flow.tarApplication.description);
+		node2.setPosition(600 + offsetX, 100 + offsetY);
 
 		// link the ports
 		let link1 = port1.link(port2);
@@ -70,7 +70,7 @@ class FlowChart extends Component<MyProps, MyState>{
 
 		if (this.state && this.state.flows) {
 			for (let i = 0; i < this.state.flows.length; i++) {
-				this.generateNodes(model, this.state.flows[i], i * 200, i * 100);
+				this.generateNodes(model, this.state.flows[i], i * 100, i * 100);
 			}
 		}
 
