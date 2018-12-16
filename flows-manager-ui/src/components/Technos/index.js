@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TechnoModel from '../../models/techno'
+import TechnosList from './List'
 
 const technoModel = new TechnoModel()
 
@@ -26,7 +27,7 @@ class Technos extends Component {
   }
 
   render () {
-    return this.props.render(this.state.data)
+    return <TechnosList technos={this.state.data} />
   }
 }
 

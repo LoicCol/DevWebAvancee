@@ -7,6 +7,10 @@ import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import Routes from './routes'
 
+import 'primereact/resources/themes/nova-light/theme.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
+
 ReactDOM.render(<Routes />, document.getElementById('root')
 )
 
