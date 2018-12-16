@@ -5,7 +5,9 @@ export class FlowRepository {
 
     getAllFlow() {
         // get Employee repository and find all employees
-        return getManager().getRepository(Flow).find();
+        return getManager().getRepository(Flow).find({
+            relations: ['srcApplication', 'tarApplication']
+        });
     }
 
     saveFlow(flow: Flow) {
@@ -17,7 +19,6 @@ export class FlowRepository {
     }
 
     getFlow(id: number) {
-        console.log('ID REPO', id);
         return getManager().getRepository(Flow).findOne(id);
     }
 
