@@ -79,7 +79,9 @@ class FlowChart extends Component<MyProps, MyState>{
 
 
 		return (
+			<div style={{}}>
 			<DiagramWidget className="srd-demo-canvas" diagramEngine={engine} />
+			</div>
 		);
 	}
 }
