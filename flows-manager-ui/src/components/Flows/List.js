@@ -3,16 +3,16 @@ import { forEach as _forEach } from 'lodash'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 
-class TechnosList extends React.PureComponent {
+class FlowsList extends React.PureComponent {
   render = () => {
-    let technosContainer = []
+    let flowsContainer = []
 
-    const { technos } = this.props
+    const { flows } = this.props
 
-    console.log('Technos :: render', technos)
+    console.log('Flows :: render', flows)
 
     return (
-      <DataTable value={technos} paginator={true} rows={30}>
+      <DataTable value={flows} paginator={true} rows={30}>
         <Column field="id" header="ID" />
         <Column field="name" header="Nom" />
       </DataTable>
@@ -20,4 +20,4 @@ class TechnosList extends React.PureComponent {
   }
 }
 
-export default TechnosList
+export default FlowsList

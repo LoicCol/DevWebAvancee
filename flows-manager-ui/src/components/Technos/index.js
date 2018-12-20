@@ -4,14 +4,14 @@ import { Button } from 'primereact/button'
 import { Growl } from 'primereact/growl'
 
 import TechnosList from './List'
-import FormContainer from './FormContainer'
+import FormContainer from './Form/Container'
 
 import TechnoModel from '../../models/techno'
 
 const technoModel = new TechnoModel()
 
 class Technos extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = { data: [] }
@@ -20,33 +20,49 @@ class Technos extends Component {
     this.onHideFormPopin = this.onHideFormPopin.bind(this)
   }
 
-  _fetchTechnos () {
-    technoModel.list()
-      .then(result => {
-        this.setState({
-          data: result
-        })
+  _fetchTechnos = () => {
+    technoModel.list().then(result => {
+      this.setState({
+        data: result,
       })
+    })
   }
 
-  onHideFormPopin (action = '') {
-    if (action === 'success') this.growl.show({ severity: 'success', summary: 'Succés', detail: 'Techno créé avec succés' })
-    if (action === 'error') this.growl.show({severity: 'error', summary: 'Erreur', detail: 'La création à échoué'})
+  onHideFormPopin = (action = '') => {
+    if (action === 'success')
+      this.growl.show({
+        severity: 'success',
+        summary: 'Succés',
+        detail: 'Techno créé avec succés',
+      })
+    if (action === 'error')
+      this.growl.show({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: 'La création à échoué',
+      })
     this.setState({ creationPopin: false })
   }
 
-  componentDidMount () {
+  componentDidMount = () => {
     this._fetchTechnos()
   }
 
-  render () {
+  render = () => {
     return (
       <div>
         <h1>Les technos</h1>
-        <Button label='Créer' onClick={() => this.setState({ creationPopin: true })} />
+        <Button
+          label="Créer"
+          onClick={() => this.setState({ creationPopin: true })}
+        />
         <TechnosList technos={this.state.data} />
-        {this.state.creationPopin ? <FormContainer id='new' onHide={this.onHideFormPopin} /> : ''}
-        <Growl ref={(el) => this.growl = el} />
+        {this.state.creationPopin ? (
+          <FormContainer id="new" onHide={this.onHideFormPopin} />
+        ) : (
+          ''
+        )}
+        <Growl ref={el => (this.growl = el)} />
       </div>
     )
   }

@@ -1,12 +1,12 @@
 import BaseModel from './base'
 
 class ApplicationModel extends BaseModel {
-  list () {
+  list = () => {
     return fetch(
-      this.API_URL + '/applications',
+      this.API_URL + '/apps',
       this.buildFetchOptions({
         method: 'GET',
-        headers: this.buildHeaders()
+        headers: this.buildHeaders(),
       })
     )
       .then(this.checkResponseStatus)

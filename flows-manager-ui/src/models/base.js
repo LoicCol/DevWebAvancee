@@ -1,25 +1,25 @@
 import 'whatwg-fetch'
 
 class BaseModel {
-  constructor () {
+  constructor() {
     this.API_URL = 'http://localhost:3004/api/v1.0'
   }
 
-  static objects () {
+  static objects = () => {
     if (this.class === 'BaseModel') {
       throw new Error('cannot instantiate BaseModel')
     }
     return new this()
   }
 
-  buildHeaders (opts) {
+  buildHeaders = (opts = {}) => {
     let headers = {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     }
     return headers
   }
 
-  buildFetchOptions (opts) {
+  buildFetchOptions = (opts = {}) => {
     let data
     if (opts.body && opts.parseBody !== false) {
       data = JSON.stringify(opts.body)
@@ -30,13 +30,13 @@ class BaseModel {
       method: opts.method || 'GET',
       headers: opts.headers || {},
       body: data || undefined,
-      credentials: 'include'
+      credentials: 'include',
     }
     if (opts && opts.cache) options.cache = opts.cache
     return options
   }
 
-  checkResponseStatus (response) {
+  checkResponseStatus = response => {
     if (response.status >= 200 && response.status < 310) {
       return response
     } else {
@@ -46,7 +46,7 @@ class BaseModel {
     }
   }
 
-  parseJSON (response) {
+  parseJSON = response => {
     return response.json()
   }
 }

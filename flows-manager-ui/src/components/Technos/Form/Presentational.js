@@ -6,22 +6,28 @@ import { Button } from 'primereact/button'
 import { get as _get } from 'lodash'
 
 class TechnosFormPresentational extends PureComponent {
-  render () {
+  render = () => {
     const { data, onChange, onHide, save } = this.props
     return (
-      <Sidebar visible fullScreen={true}  onHide={onHide}>
-        <div style={{ maxWidth: 1000, margin: 'auto'}}>
-          <h3>{data ? `Création d'une techno` : `Modification d'une techno`}</h3>
+      <Sidebar visible fullScreen={true} onHide={onHide}>
+        <div style={{ maxWidth: 1000, margin: 'auto' }}>
+          <h3>
+            {data ? `Création d'une techno` : `Modification d'une techno`}
+          </h3>
           <div style={{ margin: 10 }}>
             <span>Nom:</span>
-            <InputText name='name' value={_get(data, 'name', '')} onChange={e => onChange('name', e.target.value)} />
+            <InputText
+              name="name"
+              value={_get(data, 'name', '')}
+              onChange={e => onChange('name', e.target.value)}
+            />
           </div>
-          <div style={{ margin: 10 }}>
-            <span>Application:</span>
-            <InputText name='application' value={_get(data, 'application', '')} onChange={e => onChange('application', e.target.value)} />
-          </div>
-          <Button label='Créer' onClick={save} />
-          <Button label='Annuler' onClick={() => this.setState()} className="p-button-danger" />
+          <Button label="Créer" onClick={save} />
+          <Button
+            label="Annuler"
+            onClick={() => this.setState()}
+            className="p-button-danger"
+          />
         </div>
       </Sidebar>
     )
@@ -32,11 +38,11 @@ TechnosFormPresentational.propTypes = {
   save: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,
-  data: PropTypes.object
+  data: PropTypes.object,
 }
 
 TechnosFormPresentational.defaultProps = {
-  data: {}
+  data: {},
 }
 
 export default TechnosFormPresentational

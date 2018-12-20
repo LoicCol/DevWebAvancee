@@ -9,7 +9,7 @@ import {
 import * as React from 'react'
 import "storm-react-diagrams/dist/style.min.css";
 import "./styles.css";
-import FlowModel from '../../models/flows'
+import FlowModel from '../../models/flow'
 import { Component } from 'react'
 
 const flowModel = new FlowModel();
