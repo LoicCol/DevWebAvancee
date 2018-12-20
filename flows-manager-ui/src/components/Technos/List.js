@@ -12,16 +12,13 @@ class TechnosList extends React.PureComponent {
     console.log('Technos :: render', technos)
 
     return (
-      <div>
-        <h1>Les technos</h1>
-        <DataTable
-          value={technos}
-          paginator={true}
-          rows={30}>
-             <Column field="id" header="ID" />
-             <Column field="name" header="Nom" />
-         </DataTable>
-      </div>
+      <DataTable
+        value={technos}
+        paginator={true}
+        rows={30}>
+           <Column field="id" header="ID" />
+           <Column field="name" header="Nom" />
+       </DataTable>
     )
   }
 }
