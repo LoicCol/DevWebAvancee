@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import {Techno} from "./entity/Techno";
 import * as express from 'express';
 import * as bodyParser from "body-parser";
+import * as passport from 'passport';
 
 const errorMiddleware = require('../middlewares/error')
 
@@ -144,6 +144,7 @@ createConnection().then(async connection => {
     const application = express();
     application.use(bodyParser.json());
     application.use(bodyParser.urlencoded({ extended: true }));
+    application.use(passport.initialize());
 
     /**
      * Express configuration.
@@ -167,7 +168,6 @@ createConnection().then(async connection => {
     application.use(function (err, req, res, next) {
       errorMiddleware.handleErrors(err, req, res, next, {env: application.get('env')})
     })
-    console.log('ooo')
     module.exports = application;
 
 }).catch(error => console.log(error));

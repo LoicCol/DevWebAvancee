@@ -4,7 +4,6 @@ import { getManager } from "typeorm";
 export class ApplicationRepository {
 
     getAllApplication() {
-        // get Employee repository and find all employees
         return getManager().getRepository(Application).find();
     }
 

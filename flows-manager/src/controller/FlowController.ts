@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { FlowRepository } from "../repository/FlowRepository";
 import { ApplicationRepository } from "../repository/ApplicationRepository";
 import { Flow } from "../entity/Flow";
-import { cpus } from "os";
 
 const flowRepo: FlowRepository = new FlowRepository();
 const appRepo: ApplicationRepository = new ApplicationRepository();

@@ -4,7 +4,6 @@ import { getManager } from "typeorm";
 export class FlowRepository {
 
     getAllFlow() {
-        // get Employee repository and find all employees
         return getManager().getRepository(Flow).find({
             relations: ['srcApplication', 'tarApplication']
         });

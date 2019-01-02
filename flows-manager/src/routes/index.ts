@@ -1,7 +1,12 @@
 'use strict'
-const express = require('express')
+import * as express from 'express';
+import * as passport from 'passport';
+import { JwtStrategy } from '../passport/JwtStrategy';
+import { AuthRepository } from '../repository/AuthRepository';
+
 const router = express.Router()
 const headersMiddleware = require('../../middlewares/headers')
+const LocalStrategy = require('../passport/JwtStrategy');
 
 module.exports = router
 
@@ -23,10 +28,14 @@ router.use((req, res, next) => {
   next()
 })
 
+passport.use(new JwtStrategy( new AuthRepository()));
+
 
 router.use('/technos', require('./technos'))
-router.use('/flows', require('./flows'))
 router.use('/apps', require('./apps'))
+router.use('/flows', require('./flows'));
+router.use('/auth/login', require('./login'))
+router.use('/auth/register', require('./register'))
 
 router.use((req, res, next) => {
   console.log(req._parsedOriginalUrl)

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+import * as passport from 'passport';
 import * as flowController from '../controller/FlowController'
 
 module.exports = router
@@ -8,7 +9,7 @@ module.exports = router
 /*
 * List flow
 */
-router.get('/', flowController.getAllFlow)
+router.get('/', passport.authenticate('jwt', { session: false }), flowController.getAllFlow)
 /*
 * Post a flow
 */

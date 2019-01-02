@@ -1,10 +1,14 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
+
 @Entity()
 export class User {
 
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({ length: 500 })
+    email: string;
 
     @Column()
     firstName: string;
@@ -12,7 +16,10 @@ export class User {
     @Column()
     lastName: string;
 
-    @Column()
-    age: number;
+    @Column({ length: 100, nullable: true })
+    password: string;
+  
+    @Column({ length: 100, nullable: true })
+    passwordHash: string;
 
 }
