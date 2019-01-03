@@ -15,6 +15,22 @@ class ApplicationModel extends BaseModel {
         return result
       })
   }
+
+  create = (body = {}) => {
+    return fetch(
+      this.API_URL + '/apps',
+      this.buildFetchOptions({
+        method: 'POST',
+        headers: this.buildHeaders(),
+        body: body,
+      })
+    )
+      .then(this.checkResponseStatus)
+      .then(this.parseJSON)
+      .then(result => {
+        return result
+      })
+  }
 }
 
 export default ApplicationModel
