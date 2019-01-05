@@ -13,6 +13,7 @@ class AuthModel extends BaseModel {
       .then(this.checkResponseStatus)
       .then(this.parseJSON)
       .then(result => {
+        document.cookie = 'atk=' + result.token + ';expires=' + result.expires_in
         console.log('models/auth register', result)
         return result
       })
@@ -32,6 +33,7 @@ class AuthModel extends BaseModel {
       .then(this.checkResponseStatus)
       .then(this.parseJSON)
       .then(result => {
+        document.cookie = 'atk=' + result.token + ';expires=' + result.expires_in
         console.log('models/auth login', result)
         return result
       })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { clone as _clone } from 'lodash'
+import { Messages } from 'primereact/messages'
 
 import AuthentLogin from './AuthentLogin'
 import AuthentRegister from './AuthentRegister'
@@ -24,20 +25,27 @@ class AuthentContainer extends Component {
     authModel
       .login(this.state.data)
       .then(() => this.props.history.push('/technos'))
-      .catch(e => console.log('AuthentContainer tryLog error', e))
+      .catch(e => {
+        console.log('AuthentContainer tryLog error', e)
+        this.messages.show({
+          severity: 'error',
+          summary: 'Error Message',
+          detail: 'Email or password wrong!'
+        })
+      })
   }
 
   register() {
     authModel
       .register(this.state.data)
       .then(() => this.props.history.push('/technos'))
-      .catch(e => console.log('AuthentContainer register ror', e))
+      .catch(e => console.log('AuthentContainer register error', e))
   }
 
   switchTo() {
-      const { status } = this.state
-      if (status === 'login') this.setState({ status: 'register' })
-      if (status === 'register') this.setState({ status: 'login' })
+    const { status } = this.state
+    if (status === 'login') this.setState({ status: 'register' })
+    if (status === 'register') this.setState({ status: 'login' })
   }
 
   handleChange = (name, value) => {
@@ -50,12 +58,15 @@ class AuthentContainer extends Component {
     const { status, data } = this.state
     if (status === 'login') {
       return (
-        <AuthentLogin
-          onChange={this.handleChange}
-          data={data}
-          log={this.tryLog}
-          switchTo={this.switchTo}
-        />
+        <div>
+          <Messages ref={el => (this.messages = el)} />
+          <AuthentLogin
+            onChange={this.handleChange}
+            data={data}
+            log={this.tryLog}
+            switchTo={this.switchTo}
+          />
+        </div>
       )
     } else if (status === 'register') {
       return (

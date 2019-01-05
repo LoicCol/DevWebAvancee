@@ -12,8 +12,19 @@ class BaseModel {
     return new this()
   }
 
+  getCookie = name => {
+    var value = '; ' + document.cookie
+    var parts = value.split('; ' + name + '=')
+    if (parts.length == 2)
+      return parts
+        .pop()
+        .split(';')
+        .shift()
+  }
+
   getToken = () => {
-    return (document && document.cookies && document.cookies.atk) || ''
+    console.log('getToken', this.getCookie('atk'))
+    return this.getCookie('atk')
   }
 
   buildHeaders = (opts = {}) => {
@@ -44,6 +55,10 @@ class BaseModel {
   checkResponseStatus = response => {
     if (response.status >= 200 && response.status < 310) {
       return response
+    }
+    if (response.status === 401) {
+      window.location.hash = '/authent'
+      return null
     } else {
       var error = new Error(response.statusText)
       error.response = response
@@ -52,7 +67,7 @@ class BaseModel {
   }
 
   parseJSON = response => {
-    return response.json()
+    return response ? response.json() : {}
   }
 }
 
