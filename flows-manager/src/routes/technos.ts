@@ -18,5 +18,6 @@ router.get('/:id', technoController.getTechno)
 
 /*
 * Post a techno
+* Need to be Authentified
 */
 router.post('/', passport.authenticate('jwt', { session: false }), technoController.saveTechno)

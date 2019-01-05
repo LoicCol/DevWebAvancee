@@ -16,13 +16,16 @@ router.get('/', flowController.getAllFlow)
 router.get('/:id', flowController.getFlow)
 /*
 * Post a flow
+* Need to be Authentified
 */
 router.put('/', passport.authenticate('jwt', { session: false }), flowController.updateFlow)
 /*
 * Update a flow
+* Need to be Authentified
 */
 router.post('/', passport.authenticate('jwt', { session: false }), flowController.saveFlow)
 /*
 * Delete a flow
+* Need to be Authentified
 */
 router.delete('/', passport.authenticate('jwt', { session: false }), flowController.deleteFlow)
