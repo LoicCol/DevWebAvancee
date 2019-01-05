@@ -12,3 +12,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.p-datatable-row {
+  cursor: pointer;
+}
+
+.p-datatable-row:hover {
+  background-color: #95caf3 !important;
+}

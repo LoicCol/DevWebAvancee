@@ -23,7 +23,7 @@ class FlowsContainer extends Component {
   _fetchFlows = () => {
     flowModel.list().then(result => {
       this.setState({
-        data: result,
+        data: result
       })
     })
   }
@@ -33,13 +33,13 @@ class FlowsContainer extends Component {
       this.growl.show({
         severity: 'success',
         summary: 'Succés',
-        detail: 'Flow créé avec succés',
+        detail: 'Flow créé avec succés'
       })
     if (action === 'error')
       this.growl.show({
         severity: 'error',
         summary: 'Erreur',
-        detail: 'La création à échoué',
+        detail: 'La création à échoué'
       })
     this.setState({ creationPopin: false })
   }
@@ -50,14 +50,19 @@ class FlowsContainer extends Component {
 
   render = () => (
     <div>
-      <h1>Les flows</h1>
+      <h1 style={{ display: 'inline-block' }}>Les flows</h1>
       <Button
-        label="Créer"
+        label='Créer'
         onClick={() => this.setState({ creationPopin: true })}
+        style={{
+          display: 'inline-block',
+          verticalAlign: 'super',
+          marginLeft: 20
+        }}
       />
       <FlowsList flows={this.state.data} />
       {this.state.creationPopin ? (
-        <FormContainer id="new" onHide={this.onHideFormPopin} />
+        <FormContainer id='new' onHide={this.onHideFormPopin} />
       ) : (
         ''
       )}

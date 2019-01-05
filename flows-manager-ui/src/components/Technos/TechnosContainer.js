@@ -23,7 +23,7 @@ class TechnosContainer extends Component {
   _fetchTechnos = () => {
     technoModel.list().then(result => {
       this.setState({
-        data: result,
+        data: result
       })
     })
   }
@@ -33,13 +33,13 @@ class TechnosContainer extends Component {
       this.growl.show({
         severity: 'success',
         summary: 'Succés',
-        detail: 'Techno créé avec succés',
+        detail: 'Techno créé avec succés'
       })
     if (action === 'error')
       this.growl.show({
         severity: 'error',
         summary: 'Erreur',
-        detail: 'La création à échoué',
+        detail: 'La création à échoué'
       })
     this.setState({ creationPopin: false })
   }
@@ -51,14 +51,19 @@ class TechnosContainer extends Component {
   render = () => {
     return (
       <div>
-        <h1>Les technos</h1>
+        <h1 style={{ display: 'inline-block' }}>Les technos</h1>
         <Button
-          label="Créer"
+          label='Créer'
           onClick={() => this.setState({ creationPopin: true })}
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'super',
+            marginLeft: 20
+          }}
         />
         <TechnosList technos={this.state.data} />
         {this.state.creationPopin ? (
-          <FormContainer id="new" onHide={this.onHideFormPopin} />
+          <FormContainer id='new' onHide={this.onHideFormPopin} />
         ) : (
           ''
         )}

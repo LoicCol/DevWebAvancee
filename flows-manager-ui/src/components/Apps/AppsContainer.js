@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { get as _get } from 'lodash'
 
 import { Button } from 'primereact/button'
 import { Growl } from 'primereact/growl'
@@ -18,12 +19,13 @@ class AppsContainer extends Component {
 
     this._fetchApps = this._fetchApps.bind(this)
     this.onHideFormPopin = this.onHideFormPopin.bind(this)
+    this.handleRowClicked = this.handleRowClicked.bind(this)
   }
 
   _fetchApps = () => {
     appModel.list().then(result => {
       this.setState({
-        data: result,
+        data: result
       })
     })
   }
@@ -33,15 +35,23 @@ class AppsContainer extends Component {
       this.growl.show({
         severity: 'success',
         summary: 'Succés',
-        detail: 'App créé avec succés',
+        detail: 'App créé avec succés'
       })
+    this._fetchApps()
     if (action === 'error')
       this.growl.show({
         severity: 'error',
         summary: 'Erreur',
-        detail: 'La création à échoué',
+        detail: 'La création à échoué'
       })
-    this.setState({ creationPopin: false })
+    this.setState({ creationPopin: false, modificationId: '' })
+  }
+
+  handleRowClicked = row => {
+    console.log('AppsContainer ::: handleRowClicked', row)
+    this.setState({
+      modificationId: _get(row, 'data.id', '')
+    })
   }
 
   componentDidMount = () => {
@@ -51,14 +61,27 @@ class AppsContainer extends Component {
   render = () => {
     return (
       <div>
-        <h1>Les apps</h1>
+        <h1 style={{ display: 'inline-block' }}>Les apps</h1>
         <Button
-          label="Créer"
+          label='Créer'
           onClick={() => this.setState({ creationPopin: true })}
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'super',
+            marginLeft: 20
+          }}
         />
-        <AppsList apps={this.state.data} />
+        <AppsList apps={this.state.data} onRowClick={this.handleRowClicked} />
         {this.state.creationPopin ? (
-          <FormContainer id="new" onHide={this.onHideFormPopin} />
+          <FormContainer id='new' onHide={this.onHideFormPopin} />
+        ) : (
+          ''
+        )}
+        {this.state.modificationId ? (
+          <FormContainer
+            id={this.state.modificationId}
+            onHide={this.onHideFormPopin}
+          />
         ) : (
           ''
         )}

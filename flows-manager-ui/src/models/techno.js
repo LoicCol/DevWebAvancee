@@ -6,7 +6,7 @@ class TechnoModel extends BaseModel {
       this.API_URL + '/technos',
       this.buildFetchOptions({
         method: 'GET',
-        headers: this.buildHeaders(),
+        headers: this.buildHeaders()
       })
     )
       .then(this.checkResponseStatus)
@@ -22,7 +22,22 @@ class TechnoModel extends BaseModel {
       this.buildFetchOptions({
         method: 'POST',
         headers: this.buildHeaders(),
-        body: body,
+        body: body
+      })
+    )
+      .then(this.checkResponseStatus)
+      .then(this.parseJSON)
+      .then(result => {
+        return result
+      })
+  }
+
+  get = (id = '') => {
+    return fetch(
+      this.API_URL + '/technos/' + id,
+      this.buildFetchOptions({
+        method: 'GET',
+        headers: this.buildHeaders()
       })
     )
       .then(this.checkResponseStatus)

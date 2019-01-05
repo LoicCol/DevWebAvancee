@@ -13,7 +13,6 @@ class TechnosList extends React.PureComponent {
 
     return (
       <DataTable value={technos} paginator={true} rows={30}>
-        <Column field="id" header="ID" />
         <Column field="name" header="Nom" />
       </DataTable>
     )

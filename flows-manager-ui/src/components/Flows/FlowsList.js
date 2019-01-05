@@ -13,8 +13,10 @@ class FlowsList extends React.PureComponent {
 
     return (
       <DataTable value={flows} paginator={true} rows={30}>
-        <Column field="id" header="ID" />
-        <Column field="name" header="Nom" />
+        <Column field='name' header='Nom' />
+        <Column field='description' header='Description' />
+        <Column field='scrApplication' header='Application Source' />
+        <Column field='tarApplication' header='Application Cible' />
       </DataTable>
     )
   }

@@ -14,21 +14,21 @@ import AppsContainer from './components/Apps/AppsContainer'
 const menuItems = [
   {
     label: 'Technos',
-    icon: 'pi pi-fw pi-power-off',
+    icon: 'pi pi-fw pi-shopping-cart',
     command: event => {
       window.location.hash = '#/technos'
     }
   },
   {
     label: 'Flows',
-    icon: 'pi pi-fw pi-power-off',
+    icon: 'pi pi-fw pi-refresh',
     command: event => {
       window.location.hash = '#/flows'
     }
   },
   {
     label: 'Apps',
-    icon: 'pi pi-fw pi-power-off',
+    icon: 'pi pi-fw pi-briefcase',
     command: event => {
       window.location.hash = '#/apps'
     }

@@ -31,6 +31,21 @@ class FlowModel extends BaseModel {
         return result
       })
   }
+
+  get = (id = '') => {
+    return fetch(
+      this.API_URL + '/flows/' + id,
+      this.buildFetchOptions({
+        method: 'GET',
+        headers: this.buildHeaders()
+      })
+    )
+      .then(this.checkResponseStatus)
+      .then(this.parseJSON)
+      .then(result => {
+        return result
+      })
+  }
 }
 
 export default FlowModel

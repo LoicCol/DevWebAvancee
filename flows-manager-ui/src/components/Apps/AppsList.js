@@ -7,14 +7,16 @@ class AppsList extends React.PureComponent {
   render = () => {
     let appsContainer = []
 
-    const { apps } = this.props
+    const { apps, onRowClick } = this.props
 
     console.log('Apps :: render', apps)
 
     return (
-      <DataTable value={apps} paginator={true} rows={30}>
-        <Column field="id" header="ID" />
-        <Column field="name" header="Nom" />
+      <DataTable value={apps} paginator={true} rows={30} onRowClick={onRowClick}>
+        <Column field='name' header='Nom' />
+        <Column field='description' header='Description' />
+        <Column field='team' header='Team' />
+        <Column field='techno.name' header='Technos' />
       </DataTable>
     )
   }

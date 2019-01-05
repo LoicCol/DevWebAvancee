@@ -84,7 +84,7 @@ class FlowsFormPresentational extends PureComponent {
             <Button label="Créer" onClick={save} />
             <Button
               label="Annuler"
-              onClick={() => this.setState()}
+              onClick={onHide}
               className="p-button-danger"
             />
           </div>
