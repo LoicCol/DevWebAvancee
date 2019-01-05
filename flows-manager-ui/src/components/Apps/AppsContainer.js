@@ -3,25 +3,25 @@ import React, { Component } from 'react'
 import { Button } from 'primereact/button'
 import { Growl } from 'primereact/growl'
 
-import TechnosList from './List'
-import FormContainer from './Form/Container'
+import AppsList from './AppsList'
+import FormContainer from './AppsForm/Container'
 
-import TechnoModel from '../../models/techno'
+import AppModel from '../../models/app'
 
-const technoModel = new TechnoModel()
+const appModel = new AppModel()
 
-class Technos extends Component {
+class AppsContainer extends Component {
   constructor(props) {
     super(props)
 
     this.state = { data: [] }
 
-    this._fetchTechnos = this._fetchTechnos.bind(this)
+    this._fetchApps = this._fetchApps.bind(this)
     this.onHideFormPopin = this.onHideFormPopin.bind(this)
   }
 
-  _fetchTechnos = () => {
-    technoModel.list().then(result => {
+  _fetchApps = () => {
+    appModel.list().then(result => {
       this.setState({
         data: result,
       })
@@ -33,7 +33,7 @@ class Technos extends Component {
       this.growl.show({
         severity: 'success',
         summary: 'Succés',
-        detail: 'Techno créé avec succés',
+        detail: 'App créé avec succés',
       })
     if (action === 'error')
       this.growl.show({
@@ -45,18 +45,18 @@ class Technos extends Component {
   }
 
   componentDidMount = () => {
-    this._fetchTechnos()
+    this._fetchApps()
   }
 
   render = () => {
     return (
       <div>
-        <h1>Les technos</h1>
+        <h1>Les apps</h1>
         <Button
           label="Créer"
           onClick={() => this.setState({ creationPopin: true })}
         />
-        <TechnosList technos={this.state.data} />
+        <AppsList apps={this.state.data} />
         {this.state.creationPopin ? (
           <FormContainer id="new" onHide={this.onHideFormPopin} />
         ) : (
@@ -68,4 +68,4 @@ class Technos extends Component {
   }
 }
 
-export default Technos
+export default AppsContainer

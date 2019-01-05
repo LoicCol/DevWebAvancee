@@ -3,14 +3,14 @@ import React, { Component } from 'react'
 import { Button } from 'primereact/button'
 import { Growl } from 'primereact/growl'
 
-import FlowsList from './List'
-import FormContainer from './Form/Container'
+import FlowsList from './FlowsList'
+import FormContainer from './FlowsForm/Container'
 
 import FlowModel from '../../models/flow'
 
 const flowModel = new FlowModel()
 
-class Flows extends Component {
+class FlowsContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -66,4 +66,4 @@ class Flows extends Component {
   )
 }
 
-export default Flows
+export default FlowsContainer
