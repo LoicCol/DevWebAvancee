@@ -28,6 +28,7 @@ router.use((req, res, next) => {
   next()
 })
 
+// Ici on spécifie la stratégie qu'on souhaite utiliser pour l'authentification. 
 passport.use(new JwtStrategy( new AuthRepository()));
 
 
