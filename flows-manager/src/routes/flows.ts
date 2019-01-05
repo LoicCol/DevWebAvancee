@@ -9,16 +9,16 @@ module.exports = router
 /*
 * List flow
 */
-router.get('/', passport.authenticate('jwt', { session: false }), flowController.getAllFlow)
+router.get('/', flowController.getAllFlow)
 /*
 * Post a flow
 */
-router.put('/', flowController.updateFlow)
+router.put('/', passport.authenticate('jwt', { session: false }), flowController.updateFlow)
 /*
 * Update a flow
 */
-router.post('/', flowController.saveFlow)
+router.post('/', passport.authenticate('jwt', { session: false }), flowController.saveFlow)
 /*
 * Delete a flow
 */
-router.delete('/', flowController.deleteFlow)
+router.delete('/', passport.authenticate('jwt', { session: false }), flowController.deleteFlow)

@@ -13,10 +13,10 @@ export class Flow {
     @Column()
     description: string;
 
-    @ManyToOne(type => Application, application => application.srcFlows)
+    @ManyToOne(type => Application, application => application.srcFlows, { onDelete: 'CASCADE' })
     srcApplication: Application;
 
-    @ManyToOne(type => Application, application => application.tarFlows)
+    @ManyToOne(type => Application, application => application.tarFlows, { onDelete: 'CASCADE' })
     tarApplication: Application;
 
 }

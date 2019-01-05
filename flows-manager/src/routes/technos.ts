@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+import * as passport from 'passport';
 import * as technoController from '../controller/TechnoController'
 
 module.exports = router
@@ -18,4 +19,4 @@ router.get('/:id', technoController.getTechno)
 /*
 * Post a techno
 */
-router.post('/', technoController.saveTechno)
+router.post('/', passport.authenticate('jwt', { session: false }), technoController.saveTechno)

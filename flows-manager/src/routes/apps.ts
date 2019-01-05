@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+import * as passport from 'passport';
 import * as appController from '../controller/ApplicationController'
 
 module.exports = router
@@ -12,12 +13,12 @@ router.get('/', appController.getAllApp)
 /*
 * Post an App
 */
-router.post('/', appController.saveApp)
+router.post('/', passport.authenticate('jwt', { session: false }), appController.saveApp)
 /*
 * Update an App
 */
-router.put('/', appController.updateApp)
+router.put('/', passport.authenticate('jwt', { session: false }), appController.updateApp)
 /*
 * Delete an App
 */
-router.delete('/', appController.deleteApp)
+router.delete('/', passport.authenticate('jwt', { session: false }), appController.deleteApp)

@@ -9,7 +9,7 @@
    },
    "dependencies": {
       "@nestjs/passport": "^5.1.0",
-      "bcrypt": "^3.0.2",
+      "bcrypt": "^2.0.1",
       "bcrypt-nodejs": "0.0.3",
       "cookie-parser": "~1.4.3",
       "debug": "~2.6.9",
