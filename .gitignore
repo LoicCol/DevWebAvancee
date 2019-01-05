@@ -2,3 +2,9 @@
 flows-manager/ormconfig\.json
 
 flows-manager-ui/package-lock\.json
+
+nodes_modules/
+
+
+
+node_modules/
