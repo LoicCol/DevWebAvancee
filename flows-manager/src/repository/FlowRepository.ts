@@ -18,7 +18,9 @@ export class FlowRepository {
     }
 
     getFlow(id: number) {
-        return getManager().getRepository(Flow).findOne(id);
+        return getManager().getRepository(Flow).findOne(id, {
+            relations: ['srcApplication', 'tarApplication']
+        });
     }
 
 }

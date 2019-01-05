@@ -18,7 +18,10 @@ export class ApplicationRepository {
     }
 
     getApplication(id: number) {
-        return getManager().getRepository(Application).findOne(id);
+        return getManager().getRepository(Application).findOne(id,
+            {
+                relations: ['techno']
+            });
     }
 
 }
