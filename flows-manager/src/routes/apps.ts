@@ -11,6 +11,10 @@ module.exports = router
 */
 router.get('/', appController.getAllApp)
 /*
+* get an App
+*/
+router.get('/:id', appController.getApp)
+/*
 * Post an App
 */
 router.post('/', passport.authenticate('jwt', { session: false }), appController.saveApp)

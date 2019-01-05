@@ -11,6 +11,10 @@ module.exports = router
 */
 router.get('/', flowController.getAllFlow)
 /*
+* get a Flow
+*/
+router.get('/:id', flowController.getFlow)
+/*
 * Post a flow
 */
 router.put('/', passport.authenticate('jwt', { session: false }), flowController.updateFlow)

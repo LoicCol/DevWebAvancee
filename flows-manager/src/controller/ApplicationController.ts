@@ -16,6 +16,14 @@ export let getAllApp = async (req: Request, res: Response) => {
     });
 };
 
+export let getApp = async (req: Request, res: Response) => {
+    console.log("Received GetApp ==> GET");
+    appRepo.getApplication(req.params.id).then((result: any) => {
+        console.log("Result : " + result);
+        res.send(result);
+    });
+};
+
 export let saveApp = async (req: Request, res: Response) => {
     console.log("Received SaveApp ==> POST");
     console.log(req.body);

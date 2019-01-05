@@ -16,6 +16,14 @@ export let getAllFlow = async (req: Request, res: Response) => {
     });
 };
 
+export let getFlow = async (req: Request, res: Response) => {
+    console.log("Received GetFlow ==> GET");
+    flowRepo.getFlow(req.params.id).then((result: any) => {
+        console.log("Result : " + result);
+        res.send(result);
+    });
+};
+
 export let saveFlow = async (req: Request, res: Response) => {
     console.log("Received SaveFlow ==> POST");
     console.log(req.body);
