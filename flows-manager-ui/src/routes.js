@@ -3,21 +3,21 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 
 import AppInit from './components/AppInit'
 
-import Authent from './components/Authent'
-import Technos from './components/Technos'
-import Flows from './components/Flows'
+import AuthentContainer from './components/Authent/AuthentContainer'
+import TechnosContainer from './components/Technos/TechnosContainer'
+import FlowsContainer from './components/Flows/FlowsContainer'
 import FlowChart from './components/FlowChart'
-import Apps from './components/Apps'
+import AppsContainer from './components/Apps/AppsContainer'
 
 const Routes = props => (
   <Router {...props}>
     <div>
       <Route path="/" exact component={AppInit} />
-      <Route path="/authent" component={Authent} />
-      <Route path="/technos" component={Technos} />
-      <Route path="/flows" component={Flows} />
+      <Route path="/apps" component={AppsContainer} />
+      <Route path="/authent" component={AuthentContainer} />
+      <Route path="/technos" component={TechnosContainer} />
+      <Route path="/flows" component={FlowsContainer} />
       <Route path="/flowchart" component={FlowChart} />
-      <Route path="/apps" component={FlowChart} />
     </div>
   </Router>
 )

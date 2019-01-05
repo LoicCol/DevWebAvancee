@@ -12,10 +12,15 @@ class BaseModel {
     return new this()
   }
 
+  getToken = () => {
+    return (document && document.cookies && document.cookies.atk) || ''
+  }
+
   buildHeaders = (opts = {}) => {
     let headers = {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     }
+    if (this.getToken()) headers.Authorization = 'Bearer ' + this.getToken()
     return headers
   }
 
@@ -30,7 +35,7 @@ class BaseModel {
       method: opts.method || 'GET',
       headers: opts.headers || {},
       body: data || undefined,
-      credentials: 'include',
+      credentials: 'include'
     }
     if (opts && opts.cache) options.cache = opts.cache
     return options
