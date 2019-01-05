@@ -4,7 +4,9 @@ import { getManager } from "typeorm";
 export class ApplicationRepository {
 
     getAllApplication() {
-        return getManager().getRepository(Application).find();
+        return getManager().getRepository(Application).find({
+            relations: ['techno']
+        });
     }
 
     saveApplication(application: Application) {
