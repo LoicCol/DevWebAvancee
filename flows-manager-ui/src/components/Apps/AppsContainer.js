@@ -31,13 +31,14 @@ class AppsContainer extends Component {
   }
 
   onHideFormPopin = (action = '') => {
-    if (action === 'success')
+    if (action === 'success') {
       this.growl.show({
         severity: 'success',
         summary: 'Succés',
         detail: 'App créé avec succés'
       })
-    this._fetchApps()
+      this._fetchApps()
+    }
     if (action === 'error')
       this.growl.show({
         severity: 'error',

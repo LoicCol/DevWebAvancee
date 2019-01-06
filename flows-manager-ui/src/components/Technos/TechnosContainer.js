@@ -52,15 +52,6 @@ class TechnosContainer extends Component {
     return (
       <div>
         <h1 style={{ display: 'inline-block' }}>Les technos</h1>
-        <Button
-          label='Créer'
-          onClick={() => this.setState({ creationPopin: true })}
-          style={{
-            display: 'inline-block',
-            verticalAlign: 'super',
-            marginLeft: 20
-          }}
-        />
         <TechnosList technos={this.state.data} />
         {this.state.creationPopin ? (
           <FormContainer id='new' onHide={this.onHideFormPopin} />

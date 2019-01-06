@@ -12,7 +12,12 @@ class AppsList extends React.PureComponent {
     console.log('Apps :: render', apps)
 
     return (
-      <DataTable value={apps} paginator={true} rows={30} onRowClick={onRowClick}>
+      <DataTable
+        value={apps}
+        paginator={true}
+        rows={30}
+        onRowClick={onRowClick}
+      >
         <Column field='name' header='Nom' />
         <Column field='description' header='Description' />
         <Column field='team' header='Team' />

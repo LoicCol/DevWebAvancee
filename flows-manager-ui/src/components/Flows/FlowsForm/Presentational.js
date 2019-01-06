@@ -4,24 +4,47 @@ import { Sidebar } from 'primereact/sidebar'
 import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { Button } from 'primereact/button'
-import { AutoComplete } from 'primereact/autocomplete'
-import { get as _get } from 'lodash'
+import { Dropdown } from 'primereact/dropdown'
+import { get as _get, remove as _remove, find as _find } from 'lodash'
 
 class FlowsFormPresentational extends PureComponent {
   render = () => {
-    const { data, onChange, onHide, save, apps } = this.props
-    console.log('FlowsFormPresentational ', apps)
+    const {
+      id,
+      data,
+      onChange,
+      onHide,
+      save,
+      srcApps,
+      tarApps,
+      deleteFlow
+    } = this.props
     return (
       <Sidebar visible fullScreen={true} onHide={onHide}>
         <div style={{ maxWidth: 1000, margin: 'auto' }}>
-          <h2>{data ? `Création d'un flow` : `Modification d'un flow`}</h2>
+          <h2 style={{ display: 'inline-block' }}>
+            {id === 'new' ? `Création d'un flow` : `Modification d'un flow`}
+          </h2>
+          {id !== 'new' ? (
+            <Button
+              label='Supprimer'
+              className='p-button-secondary'
+              onClick={deleteFlow}
+              style={{
+                display: 'inline-block',
+                marginLeft: 20
+              }}
+            />
+          ) : (
+            ''
+          )}
           <table style={{ textAlign: 'left', width: '100%' }}>
             <tbody>
               <tr>
                 <td style={{ width: '30%', paddingBottom: 15 }}>Nom:</td>
                 <td style={{ width: '70%', paddingBottom: 15 }}>
                   <InputText
-                    name="name"
+                    name='name'
                     value={_get(data, 'name', '')}
                     onChange={e => onChange('name', e.target.value)}
                     style={{ width: '100%' }}
@@ -34,10 +57,10 @@ class FlowsFormPresentational extends PureComponent {
                 </td>
                 <td style={{ width: '70%', paddingBottom: 15 }}>
                   <InputTextarea
-                    name="description"
+                    name='description'
                     value={_get(data, 'description', '')}
                     onChange={e => onChange('description', e.target.value)}
-                    placeholder="Description"
+                    placeholder='Description'
                     style={{ width: '100%' }}
                   />
                 </td>
@@ -47,13 +70,23 @@ class FlowsFormPresentational extends PureComponent {
                   Application cible:
                 </td>
                 <td style={{ width: '70%', paddingBottom: 15 }}>
-                  <AutoComplete
-                    name="srcApplication"
-                    value={_get(data, 'srcApplication', '')}
+                  <Dropdown
+                    name='srcApplication'
+                    value={_find(
+                      srcApps,
+                      app => _get(app, 'id') === _get(data, 'srcApplication.id')
+                    )}
                     onChange={e => onChange('srcApplication', e.target.value)}
                     style={{ width: '100%' }}
                     inputStyle={{ width: '100%' }}
-                    suggestions={apps}
+                    options={srcApps}
+                    optionLabel='name'
+                    dropdown
+                    className={
+                      _get(data, 'technoId', '') || _get(data, 'techno', '')
+                        ? ''
+                        : 'p-error'
+                    }
                   />
                 </td>
               </tr>
@@ -62,13 +95,23 @@ class FlowsFormPresentational extends PureComponent {
                   Application source:
                 </td>
                 <td style={{ width: '70%', paddingBottom: 15 }}>
-                  <AutoComplete
-                    name="tarApplication"
-                    value={_get(data, 'tarApplication', '')}
+                  <Dropdown
+                    name='tarApplication'
+                    value={_find(
+                      tarApps,
+                      app => _get(app, 'id') === _get(data, 'tarApplication.id')
+                    )}
                     onChange={e => onChange('tarApplication', e.target.value)}
                     style={{ width: '100%' }}
                     inputStyle={{ width: '100%' }}
-                    suggestions={apps}
+                    options={tarApps}
+                    optionLabel='name'
+                    dropdown
+                    className={
+                      _get(data, 'technoId', '') || _get(data, 'techno', '')
+                        ? ''
+                        : 'p-error'
+                    }
                   />
                 </td>
               </tr>
@@ -78,14 +121,21 @@ class FlowsFormPresentational extends PureComponent {
             style={{
               display: 'flex',
               justifyContent: 'space-evenly',
-              width: '100%',
+              width: '100%'
             }}
           >
-            <Button label="Créer" onClick={save} />
+            {data.name &&
+            data.description &&
+            data.srcApplication &&
+            data.tarApplication ? (
+              <Button label='Créer' onClick={save} />
+            ) : (
+              <Button disabled label='Créer' onClick={save} />
+            )}
             <Button
-              label="Annuler"
+              label='Annuler'
               onClick={onHide}
-              className="p-button-danger"
+              className='p-button-danger'
             />
           </div>
         </div>
@@ -98,11 +148,11 @@ FlowsFormPresentational.propTypes = {
   save: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,
-  data: PropTypes.object,
+  data: PropTypes.object
 }
 
 FlowsFormPresentational.defaultProps = {
-  data: {},
+  data: {}
 }
 
 export default FlowsFormPresentational

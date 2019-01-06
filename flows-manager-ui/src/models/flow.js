@@ -46,6 +46,38 @@ class FlowModel extends BaseModel {
         return result
       })
   }
+
+  update = (body = {}) => {
+    return fetch(
+      this.API_URL + '/flows',
+      this.buildFetchOptions({
+        method: 'PUT',
+        headers: this.buildHeaders(),
+        body: body
+      })
+    )
+      .then(this.checkResponseStatus)
+      .then(this.parseJSON)
+      .then(result => {
+        return result
+      })
+  }
+
+  delete = (body = {}) => {
+    return fetch(
+      this.API_URL + '/flows',
+      this.buildFetchOptions({
+        method: 'DELETE',
+        headers: this.buildHeaders(),
+        body: body
+      })
+    )
+      .then(this.checkResponseStatus)
+      .then(this.parseJSON)
+      .then(result => {
+        return result
+      })
+  }
 }
 
 export default FlowModel

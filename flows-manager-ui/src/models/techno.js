@@ -46,6 +46,22 @@ class TechnoModel extends BaseModel {
         return result
       })
   }
+
+  delete = (body = {}) => {
+    return fetch(
+      this.API_URL + '/technos',
+      this.buildFetchOptions({
+        method: 'DELETE',
+        headers: this.buildHeaders(),
+        body: body
+      })
+    )
+      .then(this.checkResponseStatus)
+      .then(this.parseJSON)
+      .then(result => {
+        return result
+      })
+  }
 }
 
 export default TechnoModel

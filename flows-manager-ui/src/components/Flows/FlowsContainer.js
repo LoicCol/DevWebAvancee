@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { get as _get } from 'lodash'
 
 import { Button } from 'primereact/button'
 import { Growl } from 'primereact/growl'
@@ -14,10 +15,11 @@ class FlowsContainer extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { data: [] }
+    this.state = { data: [], flowSearched: '', flowSuggestions: [] }
 
     this._fetchFlows = this._fetchFlows.bind(this)
     this.onHideFormPopin = this.onHideFormPopin.bind(this)
+    this.handleRowClicked = this.handleRowClicked.bind(this)
   }
 
   _fetchFlows = () => {
@@ -28,20 +30,29 @@ class FlowsContainer extends Component {
     })
   }
 
-  onHideFormPopin = (action = '') => {
-    if (action === 'success')
+  onHideFormPopin = (action = '', message = '') => {
+    if (action === 'success') {
       this.growl.show({
         severity: 'success',
         summary: 'Succés',
         detail: 'Flow créé avec succés'
       })
+      this._fetchFlows()
+    }
     if (action === 'error')
       this.growl.show({
         severity: 'error',
         summary: 'Erreur',
-        detail: 'La création à échoué'
+        detail: message || 'La création à échoué'
       })
-    this.setState({ creationPopin: false })
+    this.setState({ creationPopin: false, modificationId: '' })
+  }
+
+  handleRowClicked = row => {
+    console.log('AppsContainer ::: handleRowClicked', row)
+    this.setState({
+      modificationId: _get(row, 'data.id', '')
+    })
   }
 
   componentDidMount = () => {
@@ -60,9 +71,29 @@ class FlowsContainer extends Component {
           marginLeft: 20
         }}
       />
-      <FlowsList flows={this.state.data} />
+      <Button
+        label='Vue en graphe'
+        onClick={() => {
+          this.props.history.push('/flowchart')
+        }}
+        className='p-button-success'
+        style={{
+          display: 'inline-block',
+          verticalAlign: 'super',
+          marginLeft: 20
+        }}
+      />
+      <FlowsList flows={this.state.data} onRowClick={this.handleRowClicked} />
       {this.state.creationPopin ? (
         <FormContainer id='new' onHide={this.onHideFormPopin} />
+      ) : (
+        ''
+      )}
+      {this.state.modificationId ? (
+        <FormContainer
+          id={this.state.modificationId}
+          onHide={this.onHideFormPopin}
+        />
       ) : (
         ''
       )}

@@ -20,6 +20,7 @@ class AppsFormContainer extends Component {
     this._fetchTechnos = this._fetchTechnos.bind(this)
     this.saveApp = this.saveApp.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.deleteApp = this.deleteApp.bind(this)
   }
 
   _fetchApp = id => {
@@ -32,7 +33,6 @@ class AppsFormContainer extends Component {
 
   _fetchTechnos = () => {
     technoModel.list().then(technos => {
-      console.log('AppsFormContainer :: tehcnos', technos)
       this.setState({
         technos: technos
       })
@@ -53,6 +53,12 @@ class AppsFormContainer extends Component {
       .catch(e => this.props.onHide('error'))
   }
 
+  deleteApp = () => {
+    appModel.delete({ id: this.props.id })
+    .then(() => this.props.onHide('success', 'Suppression réussi'))
+    .catch(e => this.props.onHide('error'))
+  }
+
   handleChange = (name, value) => {
     const data = _clone(this.state.data)
     data[name] = value
@@ -68,11 +74,13 @@ class AppsFormContainer extends Component {
 
   render = () => (
     <Presentational
+      id={this.props.id}
       save={this.saveApp}
       data={this.state.data}
       onChange={this.handleChange}
       onHide={this.props.onHide}
       technos={_unionBy(this.state.technos, 'name')}
+      deleteApp={this.props.id !== 'new' ? this.deleteApp : null}
     />
   )
 }

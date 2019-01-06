@@ -9,13 +9,28 @@ import { get as _get, find as _find, unionBy as _unionBy } from 'lodash'
 
 class AppsFormPresentational extends PureComponent {
   render = () => {
-    const { data, onChange, onHide, save, technos } = this.props
+    const { id, data, onChange, onHide, save, technos, deleteApp } = this.props
     console.log('AppsFormPresentational', data, technos)
 
     return (
       <Sidebar visible fullScreen={true} onHide={onHide}>
         <div style={{ maxWidth: 1000, margin: 'auto' }}>
-          <h2>{data ? `Création d'une app` : `Modification d'une app`}</h2>
+          <h2 style={{ display: 'inline-block' }}>
+            {id !== 'new' ? `Création d'une app` : `Modification d'une app`}
+          </h2>
+          {id !== 'new' ? (
+            <Button
+              label='Supprimer'
+              className='p-button-secondary'
+              onClick={deleteApp}
+              style={{
+                display: 'inline-block',
+                marginLeft: 20
+              }}
+            />
+          ) : (
+            ''
+          )}
           <table style={{ textAlign: 'left', width: '100%' }}>
             <tbody>
               <tr>
@@ -80,7 +95,11 @@ class AppsFormPresentational extends PureComponent {
                     options={technos}
                     optionLabel='name'
                     dropdown
-                    className={_get(data, 'technoId', '') || _get(data, 'techno', '') ? '' : 'p-error'}
+                    className={
+                      _get(data, 'technoId', '') || _get(data, 'techno', '')
+                        ? ''
+                        : 'p-error'
+                    }
                   />
                 </td>
               </tr>
@@ -93,7 +112,10 @@ class AppsFormPresentational extends PureComponent {
               width: '100%'
             }}
           >
-            {data.name && data.description && data.team && (data.technoId || data.techno) ? (
+            {data.name &&
+            data.description &&
+            data.team &&
+            (data.technoId || data.techno) ? (
               <Button label='Créer' onClick={save} />
             ) : (
               <Button disabled label='Créer' onClick={save} />
