@@ -79,8 +79,6 @@ class FlowChart extends Component<MyProps, MyState> {
     //5) load model into engine
     engine.setDiagramModel(model)
 
-		model.setLocked(true)
-
     return (
       <div style={{}}>
         <DiagramWidget className='srd-demo-canvas' diagramEngine={engine} />

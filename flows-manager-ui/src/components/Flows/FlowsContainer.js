@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { translate } from 'react-polyglot'
+
 import { get as _get } from 'lodash'
 
 import { Button } from 'primereact/button'
@@ -49,7 +51,6 @@ class FlowsContainer extends Component {
   }
 
   handleRowClicked = row => {
-    console.log('AppsContainer ::: handleRowClicked', row)
     this.setState({
       modificationId: _get(row, 'data.id', '')
     })
@@ -63,7 +64,7 @@ class FlowsContainer extends Component {
     <div>
       <h1 style={{ display: 'inline-block' }}>Les flows</h1>
       <Button
-        label='Créer'
+        label={this.props.t('create')}
         onClick={() => this.setState({ creationPopin: true })}
         style={{
           display: 'inline-block',
@@ -72,7 +73,7 @@ class FlowsContainer extends Component {
         }}
       />
       <Button
-        label='Vue en graphe'
+        label={this.props.t('graph_view')}
         onClick={() => {
           this.props.history.push('/flowchart')
         }}
@@ -102,4 +103,4 @@ class FlowsContainer extends Component {
   )
 }
 
-export default FlowsContainer
+export default translate()(FlowsContainer)

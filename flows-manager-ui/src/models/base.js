@@ -23,7 +23,6 @@ class BaseModel {
   }
 
   getToken = () => {
-    console.log('getToken', this.getCookie('atk'))
     return this.getCookie('atk')
   }
 

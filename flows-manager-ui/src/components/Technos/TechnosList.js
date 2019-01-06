@@ -9,8 +9,6 @@ class TechnosList extends React.PureComponent {
 
     const { technos } = this.props
 
-    console.log('Technos :: render', technos)
-
     return (
       <DataTable value={technos} paginator={true} rows={30}>
         <Column field="name" header="Nom" />

@@ -21,12 +21,10 @@ class AuthentContainer extends Component {
   }
 
   tryLog() {
-    console.log('AuthentContainer :: tryLog')
     authModel
       .login(this.state.data)
       .then(() => this.props.history.push('/technos'))
       .catch(e => {
-        console.log('AuthentContainer tryLog error', e)
         this.messages.show({
           severity: 'error',
           summary: 'Error Message',

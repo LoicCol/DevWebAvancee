@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { translate } from 'react-polyglot'
+
 import { get as _get } from 'lodash'
 
 import { Button } from 'primereact/button'
@@ -49,7 +51,6 @@ class AppsContainer extends Component {
   }
 
   handleRowClicked = row => {
-    console.log('AppsContainer ::: handleRowClicked', row)
     this.setState({
       modificationId: _get(row, 'data.id', '')
     })
@@ -64,7 +65,7 @@ class AppsContainer extends Component {
       <div>
         <h1 style={{ display: 'inline-block' }}>Les apps</h1>
         <Button
-          label='Créer'
+          label={this.props.t('create')}
           onClick={() => this.setState({ creationPopin: true })}
           style={{
             display: 'inline-block',
@@ -92,4 +93,4 @@ class AppsContainer extends Component {
   }
 }
 
-export default AppsContainer
+export default translate()(AppsContainer)

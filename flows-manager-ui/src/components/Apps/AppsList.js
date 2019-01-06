@@ -9,8 +9,6 @@ class AppsList extends React.PureComponent {
 
     const { apps, onRowClick } = this.props
 
-    console.log('Apps :: render', apps)
-
     return (
       <DataTable
         value={apps}
